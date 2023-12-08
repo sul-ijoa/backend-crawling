@@ -1,6 +1,6 @@
 # sul-ijoa_be_crawling
 ### 개발환경
-**IDE:** IntelliJ IDEA 2023.2.3 (Ultimate Edition)
+**IDE:** IntelliJ IDEA 2023.2.3 (Ultimate Edition)  
 **language:** python==3.11.4  
 **library:**  
 pandas==2.1.1  
