@@ -14,7 +14,7 @@ https://www.data.go.kr/data/15071760/fileData.do
 
 ### 데이터 가공
 1. 지역을 서교동으로 축소
-2. 공공데이터에서 사용할 컬럼
+2. 공공데이터에서 사용한 컬럼
    1. address
    2. restaurantName
    3. category
@@ -23,7 +23,7 @@ https://www.data.go.kr/data/15071760/fileData.do
 3. 필요한 컬럼
    1. latitude (x_coordinate를 latitude로 변환)
    2. longitude (y_coordinate를 longitude로 변환)
-4. 임의로 추가할 컬럼
+4. 추가한 컬럼 **(임의로 기입한 데이터이므로 정확하지 않음)**
    1. sojuPrice
    2. beerPrice
    3. businessHours
@@ -32,12 +32,9 @@ https://www.data.go.kr/data/15071760/fileData.do
 TM 좌표계(x, y좌표)를 WGS 84 좌표계(위도, 경도)로 변환  
 공공데이터에서 제공한 x_coordinate, y_coordinate를 위도, 경도로 변환함  
 변환 이후 x_coordinate, y_coordinate는 사용하지 않으므로 해당 컬럼을 삭제함  
-``
-카카오맵에서 위치 마커를 띄우기 위해서는 위도/경도가 필요하므로
-`` <br>
-``
-공공데이터에서 제공된 x, y좌표를 위도, 경도로 변환함
-``
+**카카오맵에서 위치 마커를 띄우기 위해서는 위도/경도가 필요하므로 <br>
+공공데이터에서 제공된 x, y좌표를 위도, 경도로 변환함**
+
 1. 패키지 설치: pip install pandas numpy pyproj
    1. pandas: csv 파일 읽고 쓰는 데이터 작업을 위함
    2. numpy: 위도, 경도 계산을 위함
