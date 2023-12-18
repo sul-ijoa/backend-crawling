@@ -60,7 +60,7 @@ for restaurantName in restaurant_names:
 
             # 대기 후 큰 이미지 선택
             big_image = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".sFlh5c.pT0Scc.iPVvYb")))
-            image_url = big_image.get_attribute("src")
+            image_url = big_image.get_attribute("src").strip("'")
             print(f"'{restaurantName}'의 이미지{i + 1} URL:", image_url)
 
             # 개별 이미지 URL을 리스트에 추가
@@ -76,11 +76,12 @@ for restaurantName in restaurant_names:
                 print("css selector 다름")
             continue
 
-    # 이미지 URL을 문자열로 변환하여 리스트에 추가
-    all_image_urls.append(', '.join(map(str, image_urls)))
+    # 이미지 URL 리스트를 데이터프레임에 추가 (작은 따옴표 없이)
+    all_image_urls.append(image_urls)
 
 # 이미지 URL 리스트를 데이터프레임에 추가
 df['imageURLs'] = all_image_urls
 
 # 결과를 CSV 파일로 저장
+df['imageURLs'] = df['imageURLs'].apply(lambda x: ', '.join(x) if isinstance(x, list) else x)
 df.to_csv(output_csv_path, index=False)
