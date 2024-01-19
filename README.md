@@ -39,6 +39,28 @@ TM 좌표계(x, y좌표)를 WGS 84 좌표계(위도, 경도)로 변환
    1. pandas: csv 파일 읽고 쓰는 데이터 작업을 위함
    2. numpy: 위도, 경도 계산을 위함
    3. pyproj: TM 좌표를 WGS 84 좌표계로 변환하기 위함
+```
+def convert_tm_to_latlon(tm_x, tm_y):
+    """
+    TM 좌표를 위도 경도로 변환하는 함수
+    - tm_x: x 좌표값 또는 배열
+    - tm_y: y 좌표값 또는 배열
+    """
+    p1 = pyproj.Proj(init='epsg:2097')  # TM 좌표계
+    p2 = pyproj.Proj(init='epsg:4326')  # WGS 84 좌표계
+
+    # 만약 tm_x, tm_y가 스칼라 값이라면 배열 형태로 변환
+    if not isinstance(tm_x, (list, np.ndarray)):
+        tm_x = np.array(tm_x)
+    if not isinstance(tm_y, (list, np.ndarray)):
+        tm_y = np.array(tm_y)
+
+    lon, lat = pyproj.transform(p1, p2, tm_x, tm_y)
+    return lat, lon
+```
+‘pyproj’ 라이브러리를 사용하여 TM좌표계를 WGS84 좌표계로 변환합니다.
+‘pyproj.transform’ 함수를 호출하여 좌표를 변환하고, 위도(lat), 경도(lon)을 반환합니다.
+
 
 ### 가게 사진 크롤링
 가게 정보에 사진을 띄우기위해 사진이 필요했지만 공공데이터에서는 지원해주지 않으므로 직접 크롤링하여 사진url을 추출함
